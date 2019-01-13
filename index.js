@@ -36,6 +36,7 @@ app.post("/car", async (req, res) => {
 });
 
 // the before function is from mocha and it tells it  what to do before running tests, use ``done()`` to say when it should move on to the tests.
+// in this case im telling it to secure a connection before running the tests
 before(done => {
   mongoose
     .connect(
