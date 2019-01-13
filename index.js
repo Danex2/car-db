@@ -35,9 +35,20 @@ app.post("/car", async (req, res) => {
   }
 });
 
-mongoose
-  .connect(
-    "mongodb://localhost:27017/car-db",
-    { useNewUrlParser: true }
-  )
-  .then(() => app.listen(4000, () => console.log("Listening on port: 4000")));
+// the before function is from mocha and it tells it  what to do before running tests, use ``done()`` to say when it should move on to the tests.
+before(done => {
+  mongoose
+    .connect(
+      "mongodb://localhost:27017/car-db",
+      { useNewUrlParser: true }
+    )
+    .then(() => app.listen(4000, () => console.log("Listening on port: 4000")));
+  done();
+});
+
+// after is more or less the same. After the tests are run I want to exit
+after(() => {
+  process.exit();
+});
+
+module.exports = app;
