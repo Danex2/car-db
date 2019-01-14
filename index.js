@@ -16,7 +16,7 @@ app.get("/car", async (req, res) => {
     const cars = await Car.find({}).exec();
     res.status(200).json(cars);
   } catch (e) {
-    res.send(e._message);
+    res.status(500).json(e._message);
   }
 });
 
@@ -31,7 +31,7 @@ app.post("/car", async (req, res) => {
     const car = await Car.create(carData);
     res.status(201).json(car.toJSON());
   } catch (e) {
-    res.send(e._message);
+    res.status(500).send(e._message);
   }
 });
 
