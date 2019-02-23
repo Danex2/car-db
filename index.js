@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const { json, urlencoded } = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
+const connect = require("./connect");
 mongoose.Promise = global.Promise;
 const Car = require("./models/car");
 
@@ -20,6 +21,10 @@ app.get("/car", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("API works");
+});
+
 // Add a car to the db
 app.post("/car", async (req, res) => {
   const carData = {
@@ -35,21 +40,9 @@ app.post("/car", async (req, res) => {
   }
 });
 
-// the before function is from mocha and it tells it  what to do before running tests, use ``done()`` to say when it should move on to the tests.
-// in this case im telling it to secure a connection before running the tests
-before(done => {
-  mongoose
-    .connect(
-      "mongodb://localhost:27017/car-db",
-      { useNewUrlParser: true }
-    )
-    .then(() => app.listen(4000, () => console.log("Listening on port: 4000")));
-  done();
-});
-
-// after is more or less the same. After the tests are run I want to exit
-after(() => {
-  process.exit();
-});
+/*connect("mongodb://mongo:27017/car-db").then(() =>
+  app.listen(provess.env.PORT, () => console.log("Listening on port: 4000"))
+);*/
+app.listen(process.env.PORT, () => console.log("Running."));
 
 module.exports = app;

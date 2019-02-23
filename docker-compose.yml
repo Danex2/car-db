@@ -1,0 +1,16 @@
+version: "3"
+services:
+  api:
+    container_name: "car_api"
+    build: .
+    ports:
+      - "4000:4000"
+    restart: always
+    links:
+      - mongo
+  mongo:
+    container_name: "car_db"
+    image: mongo
+    command: --smallfiles
+    ports:
+      - "27017:27017"
