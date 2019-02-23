@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha"
+    "test": "mocha __tests__"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
