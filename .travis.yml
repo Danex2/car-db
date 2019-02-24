@@ -14,7 +14,7 @@ services:
   - mongodb
   - docker
 script:
-  - docker build --pull --cache-from dmiller94/docker-eb -t dmiller94/docker-eb .
+  - docker build -t dmiller94/docker-eb .
 after_script:
   - docker images
 before_deploy:
