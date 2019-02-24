@@ -26,5 +26,3 @@ before_deploy:
 deploy:
   provider: script
   script: docker push dmiller94/docker-eb
-  on:
-    branch: master
