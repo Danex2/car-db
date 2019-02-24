@@ -9,6 +9,8 @@ node_js:
 before_script:
   - sleep 15
   - yarn test
+notifications:
+  email: false
 cache:
   - node_modules
   - yarn
