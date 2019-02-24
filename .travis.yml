@@ -12,4 +12,5 @@ services:
 script:
   - docker build -t docker-eb .
 after_script:
+  - yarn test
   - docker images
