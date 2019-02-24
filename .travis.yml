@@ -18,7 +18,7 @@ services:
   - mongodb
   - docker
 script:
-  - docker build -t docker-eb .
+  - docker build -t dmiller94/docker-eb .
 after_script:
   - docker images
 before_deploy:
