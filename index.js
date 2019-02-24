@@ -3,7 +3,6 @@ const morgan = require("morgan");
 const { json, urlencoded } = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
-const connect = require("./connect");
 mongoose.Promise = global.Promise;
 const Car = require("./models/car");
 
