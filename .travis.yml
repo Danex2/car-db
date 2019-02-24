@@ -7,6 +7,7 @@ env:
 node_js:
   - "node"
 before_script:
+  - docker pull dmiller94/docker-eb || true
   - yarn test
 notifications:
   email: false
@@ -17,11 +18,11 @@ services:
   - mongodb
   - docker
 script:
-  - docker build -t dmiller94/docker-eb .
+  - docker build --pull --cache-from dmiller94/docker-eb -t dmiller94/docker-eb .
 after_script:
   - docker images
 before_deploy:
-  - docker login -u "$REGISTRY_USER" --password-stdin "$REGISTRY_PASS"
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 deploy:
   provider: script
   script: docker push dmiller94/docker-eb
