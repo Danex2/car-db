@@ -6,7 +6,7 @@ COPY package*.json /usr/src/app
 
 RUN npm install
 
-EXPOSE $PORT
+EXPOSE 4000
 
 COPY . .
 
