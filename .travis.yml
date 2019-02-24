@@ -1,5 +1,9 @@
 language: node_js
 sudo: required
+env:
+  global:
+    - REGISTRY_USER=dmiller94
+    - secure: "qlwtj+IkP9RJiDlfzRUHb6G2EkGbViZAZzYLKDcSRJ+kMRlgXMzC9Toidck2Jq1hbWpwfGfDsbhU4E4vOliP979Ll6AYy7AkmyclWv/O4V5Lb1Ko1c5kAsKX3cC31EUrtIocWI94GCBGV2LSbVlz/v+U+UpUdsuycDEw7L7WggtaWQTe7dzzqrQz1kVpkP4iqB7OdKWz64qxHEtAlO8G29JXzrK3xMIjdkYMhpDuCX7Sx2qhtid7cN/39AC/mwUbw+ATdDVtJXH9+H5y9pNdhxKy0uNG0+FoMwTlLc9QrjkgQu62pQ3kJLayNV7AImLRx3DsKT2nhceKu4da7NXd/B8DYVcAigXWS/H5MCmqY2QocjBfRAYnGcTkPTvcm6sjMrGxtDXmXVUMvsrAziNHNq7FPW8aawvlJSCnIvbyt13yxeGB6jyJu1LlYoaAqEW2vZH+SQE6NnEJx4Uw+8Racdtrx0x64OB7CQRf7j3x6ZRAvS7tQfmXjGaeIwIBO568qU/pCHkPHwx9fDJUZUpkY+AhJ4CCXBl+7Hq6GZktdnh1wjWOwiEAFH5WsNs0QI9d7ROOB5duUclTX7/GDpP3irFmcLW7Gvmw8iu4NGfJBYAUAG1UxEAiPkGCk1OkwXQp05bgPx5eozl/mAHT6iHcOUy2pBcEx8xlSGWVGZlSnnw="
 node_js:
   - "node"
 before_script:
@@ -14,11 +18,13 @@ services:
   - mongodb
   - docker
 script:
-  - docker build -t dmiller94/docker-eb .
+  - docker build --pull --cache-from dmiller94/docker-eb -t dmiller94/docker-eb .
 after_script:
   - docker images
 before_deploy:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 deploy:
   provider: script
   script: docker push dmiller94/docker-eb
+  on:
+    branch: master
