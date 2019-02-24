@@ -1,3 +1,9 @@
 language: node_js
 node_js:
   - "node"
+before_script:
+  - sleep 15
+cache:
+  - node_modules
+services:
+  - mongodb
