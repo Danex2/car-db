@@ -20,7 +20,7 @@ script:
 after_script:
   - docker images
 before_deploy:
-  - docker login -u "$REGISTRY_USER" --password-stdin "$REGISTRY_PASS"
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 deploy:
   provider: script
   script: docker push dmiller94/docker-eb
